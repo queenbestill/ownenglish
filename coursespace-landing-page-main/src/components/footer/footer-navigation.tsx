@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import Link from 'next/link'
 import Grid from '@mui/material/Grid'
 import MuiLink from '@mui/material/Link'
+import { Link as ScrollLink } from 'react-scroll'
 import type { Navigation } from '@/interfaces/navigation'
 import { navigations as headerNavigations } from '@/components/navigation/navigation.data'
 import { FooterSectionTitle } from '@/components/footer'
@@ -40,19 +41,40 @@ interface NavigationItemProps {
 }
 
 const NavigationItem: FC<NavigationItemProps> = ({ label, path }) => {
+  // Si el path es '#', usar ScrollLink para Home
+  if (path === '#') {
+    return (
+      <ScrollLink to="hero" spy={true} smooth={true} offset={0} duration={350}>
+        <MuiLink
+          underline="hover"
+          sx={{
+            display: 'block',
+            mb: 1,
+            color: 'primary.contrastText',
+            cursor: 'pointer',
+          }}
+        >
+          {label}
+        </MuiLink>
+      </ScrollLink>
+    )
+  }
+
+  // Para otros enlaces, usar ScrollLink
   return (
-    <Link href={path} passHref>
+    <ScrollLink to={path} spy={true} smooth={true} offset={0} duration={350}>
       <MuiLink
         underline="hover"
         sx={{
           display: 'block',
           mb: 1,
           color: 'primary.contrastText',
+          cursor: 'pointer',
         }}
       >
         {label}
       </MuiLink>
-    </Link>
+    </ScrollLink>
   )
 }
 
