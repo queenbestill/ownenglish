@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import Head from 'next/head'
+import Script from 'next/script'
 import type { AppProps } from 'next/app'
 import { CssBaseline } from '@mui/material'
 import { EmotionCache } from '@emotion/cache'
@@ -32,6 +33,18 @@ const App: FC<AppPropsWithLayout> = (props: AppPropsWithLayout) => {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Own English</title>
       </Head>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=G-YLPCNELSBM`} 
+        strategy="afterInteractive"
+      />
+      <Script id="ga-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-YLPCNELSBM');
+        `}
+      </Script>
       <MUIProvider>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
